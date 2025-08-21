@@ -1,0 +1,17 @@
+{
+  "title": "Home/Office Network Dashboard",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Router CPU (example)",
+      "targets": []
+    },
+    {
+      "type": "graph",
+      "title": "Bandwidth (example)",
+      "targets": []
+    }
+  ],
+  "schemaVersion": 36,
+  "version": 1
+}

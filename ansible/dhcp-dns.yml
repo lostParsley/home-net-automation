@@ -1,0 +1,20 @@
+- name: DHCP and DNS config
+  hosts: router
+  gather_facts: no
+  tasks:
+    - name: Configure DHCP pool
+      cisco.ios.ios_config:
+        lines:
+          - ip dhcp excluded-address 192.168.1.1 192.168.1.20
+          - ip dhcp pool HOME
+          - network 192.168.1.0 255.255.255.0
+          - default-router 192.168.1.1
+          - dns-server 8.8.8.8 1.1.1.1
+
+    - name: Configure interface LAN (example Gi0/1)
+      cisco.ios.ios_config:
+        lines:
+          - interface GigabitEthernet0/1
+          - description LAN
+          - ip address 192.168.1.1 255.255.255.0
+          - no shutdown

@@ -1,0 +1,19 @@
+- name: Basic firewall (ACL) example
+  hosts: router
+  gather_facts: no
+  tasks:
+    - name: Define ACL to block inbound HTTP from WAN
+      cisco.ios.ios_config:
+        lines:
+          - ip access-list extended BLOCK_HTTP_INBOUND
+          - deny tcp any any eq 80
+          - permit ip any any
+
+    - name: Apply ACL to WAN interface (example Gi0/0)
+      cisco.ios.ios_config:
+        lines:
+          - interface GigabitEthernet0/0
+          - description WAN
+          - ip address dhcp
+          - ip access-group BLOCK_HTTP_INBOUND in
+          - no shutdown
